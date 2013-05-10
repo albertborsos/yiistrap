@@ -1,6 +1,6 @@
 {
-    "name": "crisu83/yiistrap",
-    "description": "Twitter Bootstrap for the Yii PHP framework.",
+    "name": "2amigos/yiistrap",
+    "description": "Twitter Bootstrap for the Yii PHP framework. Own maintained version.",
     "keywords": ["bootstrap", "yii"],
     "type": "yii-extension",
     "license": "BSD-3-Clause",
