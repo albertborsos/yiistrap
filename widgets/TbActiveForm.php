@@ -679,8 +679,9 @@ class TbActiveForm extends CActiveForm
     {
         $errorOptions = TbHtml::popOption('errorOptions', $options, array());
         $error = $this->error($model, $attribute, $errorOptions);
-        if (!empty($error))
+        if ($model->hasErrors($attribute))
         {
+			var_dump($error);
             $options['error'] = $error;
             $options['color'] = TbHtml::INPUT_COLOR_ERROR;
         }

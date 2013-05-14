@@ -613,17 +613,6 @@ class TbHtml extends CHtml // required in order to access the protected methods 
 		return CHtml::tag($tag, $htmlOptions, $content, $closeTag);
 	}
 
-	/**
-	 * Generates an open HTML element.
-	 * @param string $tag the tag name.
-	 * @param array $htmlOptions the element attributes.
-	 * @return string the generated HTML element tag.
-	 */
-	public static function openTag($tag, $htmlOptions = array())
-	{
-		return self::tag($tag, $htmlOptions);
-	}
-
 	// Tables
 	// http://twitter.github.com/bootstrap/base-css.html#forms
 	// --------------------------------------------------
