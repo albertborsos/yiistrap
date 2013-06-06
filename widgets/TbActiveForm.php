@@ -688,7 +688,6 @@ class TbActiveForm extends CActiveForm
         $error = $this->error($model, $attribute, $errorOptions);
         if ($model->hasErrors($attribute))
         {
-			var_dump($error);
             $options['error'] = $error;
             $options['color'] = TbHtml::INPUT_COLOR_ERROR;
         }
