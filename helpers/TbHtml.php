@@ -613,6 +613,17 @@ class TbHtml extends CHtml // required in order to access the protected methods 
 		return CHtml::tag($tag, $htmlOptions, $content, $closeTag);
 	}
 
+	/**
+	 * Generates an open HTML element.
+	 * @param string $tag the tag name.
+	 * @param array $htmlOptions the element attributes.
+	 * @return string the generated HTML element tag.
+	 */
+	public static function openTag($tag, $htmlOptions = array())
+	{
+		return self::tag($tag, $htmlOptions, false, false);
+	}
+
 	// Tables
 	// http://twitter.github.com/bootstrap/base-css.html#forms
 	// --------------------------------------------------
@@ -3790,6 +3801,7 @@ EOD;
 			$prevLabel = self::popOption('label', $prevOptions, '&lsaquo;');
 			$nextOptions = self::popOption('nextOptions', $htmlOptions, array());
 			$nextLabel = self::popOption('label', $nextOptions, '&rsaquo;');
+			$hidePrevAndNext = self::popOption('hidePrevAndNext', $htmlOptions, false);
 			ob_start();
 			echo self::openTag('div', $htmlOptions);
 			echo self::carouselIndicators($selector, count($items), $indicatorOptions);
@@ -3810,8 +3822,11 @@ EOD;
 				echo self::carouselItem($content, $label, $caption, $itemOptions);
 			}
 			echo '</div>';
-			echo self::carouselPrevLink($prevLabel, $selector, $prevOptions);
-			echo self::carouselNextLink($nextLabel, $selector, $nextOptions);
+			if (!$hidePrevAndNext)
+			{
+				echo self::carouselPrevLink($prevLabel, $selector, $prevOptions);
+				echo self::carouselNextLink($nextLabel, $selector, $nextOptions);
+			}
 			echo '</div>';
 			return ob_get_clean();
 		}
