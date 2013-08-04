@@ -1,29 +1,29 @@
-# cache directories
-Thumbs.db
-*.DS_Store
-*.empty
+# Composer files
+composer.phar
+vendor/*
 
-#phpstorm project files
-.idea
+# Codeception files
+codecept.phar
+tests/_log/*
+tests/acceptance/*
+tests/functional/*
+tests/acceptance.suite.yml
+tests/functional.suite.yml
 
-#netbeans project files
-nbproject
+# Node modules
+node_modules
 
-#zend studio project files
-.buildpath
-.project
-.settings
+# releases
+releases/
 
-# sass cache files
-*.sass-cache
+# project files
+.idea/*
+nbproject/*
 
 # mac deployment helpers
 switch
 
-# Composer files
-composer*
-vendor/*
-
-# docs app
-docs/app/runtime
-docs/web/assets
+# cache directories
+Thumbs.db
+*.DS_Store
+*.empty
