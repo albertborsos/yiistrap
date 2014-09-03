@@ -8,7 +8,6 @@
  * @package bootstrap.widgets
  */
 
-Yii::import('bootstrap.helpers.TbHtml');
 Yii::import('zii.widgets.grid.CButtonColumn');
 
 /**
@@ -64,7 +63,7 @@ class TbButtonColumn extends CButtonColumn
             return;
         }
 
-        $url = TbArray::popValue('url', $button, '#');
+        $url = TbArray::popValue('url', $button);
         if ($url !== '#') {
             $url = $this->evaluateExpression($url, array('data' => $data, 'row' => $row));
         }

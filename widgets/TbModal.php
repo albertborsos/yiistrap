@@ -7,8 +7,6 @@
  * @package bootstrap.widgets
  */
 
-Yii::import('bootstrap.behaviors.TbWidget');
-
 /**
  * Bootstrap modal widget.
  */
@@ -157,7 +155,7 @@ class TbModal extends CWidget
      */
     public function initOptions()
     {
-        if ($remote = TbArray::popValue('remote', $this->options)) {
+        if (($remote = $this->remote) || ($remote = TbArray::popValue('remote', $this->options))) {
             $this->options['remote'] = CHtml::normalizeUrl($remote);
         }
 
