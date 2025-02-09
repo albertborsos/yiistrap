@@ -60,7 +60,7 @@ class TbActiveForm extends CActiveForm
     public function error(
         $model,
         $attribute,
-        $htmlOptions = array(),
+        $htmlOptions = [],
         $enableAjaxValidation = true,
         $enableClientValidation = true
     ) {
@@ -77,16 +77,16 @@ class TbActiveForm extends CActiveForm
         $inputID = TbArray::getValue('inputID', $htmlOptions, $id);
         unset($htmlOptions['inputID']);
         TbArray::defaultValue('id', $inputID . '_em_', $htmlOptions);
-        $option = array(
+        $option = [
             'id' => $id,
             'inputID' => $inputID,
             'errorID' => $htmlOptions['id'],
-            'model' => get_class($model),
+            'model' => $model::class,
             'name' => $attribute,
             'enableAjaxValidation' => $enableAjaxValidation,
             'inputContainer' => 'div.control-group', // Bootstrap requires this
-        );
-        $optionNames = array(
+        ];
+        $optionNames = [
             'validationDelay',
             'validateOnChange',
             'validateOnType',
@@ -97,7 +97,7 @@ class TbActiveForm extends CActiveForm
             'validatingCssClass',
             'beforeValidateAttribute',
             'afterValidateAttribute',
-        );
+        ];
         foreach ($optionNames as $name) {
             if (isset($htmlOptions[$name])) {
                 $option[$name] = TbArray::popValue($name, $htmlOptions);
@@ -107,7 +107,7 @@ class TbActiveForm extends CActiveForm
             $option['status'] = 1;
         }
         if ($enableClientValidation) {
-            $validators = TbArray::getValue('clientValidation', $htmlOptions, array());
+            $validators = TbArray::getValue('clientValidation', $htmlOptions, []);
             $attributeName = $attribute;
             if (($pos = strrpos($attribute, ']')) !== false && $pos !== strlen($attribute) - 1) // e.g. [a]name
             {
@@ -120,7 +120,7 @@ class TbActiveForm extends CActiveForm
                     }
                 }
             }
-            if ($validators !== array()) {
+            if ($validators !== []) {
                 $option['clientValidation'] = "js:function(value, messages, attribute) {\n" . implode(
                         "\n",
                         $validators
@@ -145,7 +145,7 @@ class TbActiveForm extends CActiveForm
      * @param array $htmlOptions additional HTML attributes to be rendered in the container div tag.
      * @return string the error summary. Empty if no errors are found.
      */
-    public function errorSummary($models, $header = null, $footer = null, $htmlOptions = array())
+    public function errorSummary($models, $header = null, $footer = null, $htmlOptions = [])
     {
         if (!$this->enableAjaxValidation && !$this->enableClientValidation) {
             return TbHtml::errorSummary($models, $header, $footer, $htmlOptions);
@@ -172,7 +172,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated input field.
      * @see TbHtml::activeTextField
      */
-    public function textField($model, $attribute, $htmlOptions = array())
+    public function textField($model, $attribute, $htmlOptions = [])
     {
         return $this->createInput(TbHtml::INPUT_TYPE_TEXT, $model, $attribute, $htmlOptions);
     }
@@ -185,7 +185,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated input field.
      * @see TbHtml::activePasswordField
      */
-    public function passwordField($model, $attribute, $htmlOptions = array())
+    public function passwordField($model, $attribute, $htmlOptions = [])
     {
         return $this->createInput(TbHtml::INPUT_TYPE_PASSWORD, $model, $attribute, $htmlOptions);
     }
@@ -198,7 +198,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated input field
      * @see TbHtml::activeUrlField
      */
-    public function urlField($model, $attribute, $htmlOptions = array())
+    public function urlField($model, $attribute, $htmlOptions = [])
     {
         return $this->createInput(TbHtml::INPUT_TYPE_URL, $model, $attribute, $htmlOptions);
     }
@@ -211,7 +211,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated input field.
      * @see TbHtml::activeEmailField
      */
-    public function emailField($model, $attribute, $htmlOptions = array())
+    public function emailField($model, $attribute, $htmlOptions = [])
     {
         return $this->createInput(TbHtml::INPUT_TYPE_EMAIL, $model, $attribute, $htmlOptions);
     }
@@ -224,7 +224,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated input field.
      * @see TbHtml::activeNumberField
      */
-    public function numberField($model, $attribute, $htmlOptions = array())
+    public function numberField($model, $attribute, $htmlOptions = [])
     {
         return $this->createInput(TbHtml::INPUT_TYPE_NUMBER, $model, $attribute, $htmlOptions);
     }
@@ -237,7 +237,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated input field.
      * @see TbHtml::activeRangeField
      */
-    public function rangeField($model, $attribute, $htmlOptions = array())
+    public function rangeField($model, $attribute, $htmlOptions = [])
     {
         return $this->createInput(TbHtml::INPUT_TYPE_RANGE, $model, $attribute, $htmlOptions);
     }
@@ -249,7 +249,7 @@ class TbActiveForm extends CActiveForm
      * @param array $htmlOptions additional HTML attributes.
      * @return string the generated input field.
      */
-    public function dateField($model, $attribute, $htmlOptions = array())
+    public function dateField($model, $attribute, $htmlOptions = [])
     {
         return $this->createInput(TbHtml::INPUT_TYPE_DATE, $model, $attribute, $htmlOptions);
     }
@@ -262,7 +262,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated text area.
      * @see TbHtml::activeTextArea
      */
-    public function textArea($model, $attribute, $htmlOptions = array())
+    public function textArea($model, $attribute, $htmlOptions = [])
     {
         return $this->createInput(TbHtml::INPUT_TYPE_TEXTAREA, $model, $attribute, $htmlOptions);
     }
@@ -275,7 +275,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated input field.
      * @see TbHtml::activeFileField
      */
-    public function fileField($model, $attribute, $htmlOptions = array())
+    public function fileField($model, $attribute, $htmlOptions = [])
     {
         return $this->createInput(TbHtml::INPUT_TYPE_FILE, $model, $attribute, $htmlOptions);
     }
@@ -288,7 +288,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated radio button.
      * @see TbHtml::activeRadioButton
      */
-    public function radioButton($model, $attribute, $htmlOptions = array())
+    public function radioButton($model, $attribute, $htmlOptions = [])
     {
         return $this->createInput(TbHtml::INPUT_TYPE_RADIOBUTTON, $model, $attribute, $htmlOptions);
     }
@@ -301,7 +301,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated check box.
      * @see TbHtml::activeCheckBox
      */
-    public function checkBox($model, $attribute, $htmlOptions = array())
+    public function checkBox($model, $attribute, $htmlOptions = [])
     {
         return $this->createInput(TbHtml::INPUT_TYPE_CHECKBOX, $model, $attribute, $htmlOptions);
     }
@@ -315,7 +315,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated drop down list.
      * @see TbHtml::activeDropDownList
      */
-    public function dropDownList($model, $attribute, $data, $htmlOptions = array())
+    public function dropDownList($model, $attribute, $data, $htmlOptions = [])
     {
         return $this->createInput(TbHtml::INPUT_TYPE_DROPDOWNLIST, $model, $attribute, $htmlOptions, $data);
     }
@@ -329,7 +329,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated list box.
      * @see TbHtml::activeListBox
      */
-    public function listBox($model, $attribute, $data, $htmlOptions = array())
+    public function listBox($model, $attribute, $data, $htmlOptions = [])
     {
         return $this->createInput(TbHtml::INPUT_TYPE_LISTBOX, $model, $attribute, $htmlOptions, $data);
     }
@@ -343,7 +343,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated radio button list.
      * @see TbHtml::activeRadioButtonList
      */
-    public function radioButtonList($model, $attribute, $data, $htmlOptions = array())
+    public function radioButtonList($model, $attribute, $data, $htmlOptions = [])
     {
         return $this->createInput(TbHtml::INPUT_TYPE_RADIOBUTTONLIST, $model, $attribute, $htmlOptions, $data);
     }
@@ -357,7 +357,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated radio button list.
      * @see TbHtml::activeInlineRadioButtonList
      */
-    public function inlineRadioButtonList($model, $attribute, $data, $htmlOptions = array())
+    public function inlineRadioButtonList($model, $attribute, $data, $htmlOptions = [])
     {
         $htmlOptions['inline'] = true;
         return $this->createInput(TbHtml::INPUT_TYPE_RADIOBUTTONLIST, $model, $attribute, $htmlOptions, $data);
@@ -372,7 +372,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated checkbox list.
      * @see TbHtml::activeCheckBoxList
      */
-    public function checkBoxList($model, $attribute, $data, $htmlOptions = array())
+    public function checkBoxList($model, $attribute, $data, $htmlOptions = [])
     {
         return $this->createInput(TbHtml::INPUT_TYPE_CHECKBOXLIST, $model, $attribute, $htmlOptions, $data);
     }
@@ -386,7 +386,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated checkbox list.
      * @see TbHtml::activeInlineCheckBoxList
      */
-    public function inlineCheckBoxList($model, $attribute, $data, $htmlOptions = array())
+    public function inlineCheckBoxList($model, $attribute, $data, $htmlOptions = [])
     {
         $htmlOptions['inline'] = true;
         return $this->createInput(TbHtml::INPUT_TYPE_CHECKBOXLIST, $model, $attribute, $htmlOptions, $data);
@@ -400,7 +400,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated field.
      * @see TbHtml::activeUneditableField
      */
-    public function uneditableField($model, $attribute, $htmlOptions = array())
+    public function uneditableField($model, $attribute, $htmlOptions = [])
     {
         return $this->createInput(TbHtml::INPUT_TYPE_UNEDITABLE, $model, $attribute, $htmlOptions);
     }
@@ -413,7 +413,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated input.
      * @see TbHtml::activeSearchField
      */
-    public function searchQuery($model, $attribute, $htmlOptions = array())
+    public function searchQuery($model, $attribute, $htmlOptions = [])
     {
         return $this->createInput(TbHtml::INPUT_TYPE_SEARCH, $model, $attribute, $htmlOptions);
     }
@@ -428,7 +428,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated input.
      * @see TbHtml::createActiveInput
      */
-    public function createInput($type, $model, $attribute, $htmlOptions = array(), $data = array())
+    public function createInput($type, $model, $attribute, $htmlOptions = [], $data = [])
     {
         return TbHtml::createActiveInput($type, $model, $attribute, $htmlOptions, $data);
     }
@@ -441,7 +441,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated control group.
      * @see TbHtml::activeTextFieldControlGroup
      */
-    public function textFieldControlGroup($model, $attribute, $htmlOptions = array())
+    public function textFieldControlGroup($model, $attribute, $htmlOptions = [])
     {
         return $this->createControlGroup(TbHtml::INPUT_TYPE_TEXT, $model, $attribute, $htmlOptions);
     }
@@ -454,7 +454,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated control group.
      * @see TbHtml::activePasswordFieldControlGroup
      */
-    public function passwordFieldControlGroup($model, $attribute, $htmlOptions = array())
+    public function passwordFieldControlGroup($model, $attribute, $htmlOptions = [])
     {
         return $this->createControlGroup(TbHtml::INPUT_TYPE_PASSWORD, $model, $attribute, $htmlOptions);
     }
@@ -467,7 +467,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated control group.
      * @see TbHtml::activeUrlFieldControlGroup
      */
-    public function urlFieldControlGroup($model, $attribute, $htmlOptions = array())
+    public function urlFieldControlGroup($model, $attribute, $htmlOptions = [])
     {
         return $this->createControlGroup(TbHtml::INPUT_TYPE_URL, $model, $attribute, $htmlOptions);
     }
@@ -480,7 +480,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated control group.
      * @see TbHtml::activeEmailFieldControlGroup
      */
-    public function emailFieldControlGroup($model, $attribute, $htmlOptions = array())
+    public function emailFieldControlGroup($model, $attribute, $htmlOptions = [])
     {
         return $this->createControlGroup(TbHtml::INPUT_TYPE_EMAIL, $model, $attribute, $htmlOptions);
     }
@@ -493,7 +493,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated control group.
      * @see TbHtml::activeNumberFieldControlGroup
      */
-    public function numberFieldControlGroup($model, $attribute, $htmlOptions = array())
+    public function numberFieldControlGroup($model, $attribute, $htmlOptions = [])
     {
         return $this->createControlGroup(TbHtml::INPUT_TYPE_NUMBER, $model, $attribute, $htmlOptions);
     }
@@ -506,7 +506,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated control group.
      * @see TbHtml::activeRangeFieldControlGroup
      */
-    public function rangeFieldControlGroup($model, $attribute, $htmlOptions = array())
+    public function rangeFieldControlGroup($model, $attribute, $htmlOptions = [])
     {
         return $this->createControlGroup(TbHtml::INPUT_TYPE_RANGE, $model, $attribute, $htmlOptions);
     }
@@ -519,7 +519,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated control group.
      * @see TbHtml::activeDateFieldControlGroup
      */
-    public function dateFieldControlGroup($model, $attribute, $htmlOptions = array())
+    public function dateFieldControlGroup($model, $attribute, $htmlOptions = [])
     {
         return $this->createControlGroup(TbHtml::INPUT_TYPE_DATE, $model, $attribute, $htmlOptions);
     }
@@ -532,7 +532,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated control group.
      * @see TbHtml::activeTextAreaControlGroup
      */
-    public function textAreaControlGroup($model, $attribute, $htmlOptions = array())
+    public function textAreaControlGroup($model, $attribute, $htmlOptions = [])
     {
         return $this->createControlGroup(TbHtml::INPUT_TYPE_TEXTAREA, $model, $attribute, $htmlOptions);
     }
@@ -545,7 +545,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated control group.
      * @see TbHtml::activeCheckBoxControlGroup
      */
-    public function checkBoxControlGroup($model, $attribute, $htmlOptions = array())
+    public function checkBoxControlGroup($model, $attribute, $htmlOptions = [])
     {
         return $this->createControlGroup(TbHtml::INPUT_TYPE_CHECKBOX, $model, $attribute, $htmlOptions);
     }
@@ -558,7 +558,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated control group.
      * @see TbHtml::activeRadioButtonControlGroup
      */
-    public function radioButtonControlGroup($model, $attribute, $htmlOptions = array())
+    public function radioButtonControlGroup($model, $attribute, $htmlOptions = [])
     {
         return $this->createControlGroup(TbHtml::INPUT_TYPE_RADIOBUTTON, $model, $attribute, $htmlOptions);
     }
@@ -572,7 +572,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated control group.
      * @see TbHtml::activeDropDownListControlGroup
      */
-    public function dropDownListControlGroup($model, $attribute, $data, $htmlOptions = array())
+    public function dropDownListControlGroup($model, $attribute, $data, $htmlOptions = [])
     {
         return $this->createControlGroup(TbHtml::INPUT_TYPE_DROPDOWNLIST, $model, $attribute, $htmlOptions, $data);
     }
@@ -586,7 +586,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated control group.
      * @see TbHtml::activeListBoxControlGroup
      */
-    public function listBoxControlGroup($model, $attribute, $data, $htmlOptions = array())
+    public function listBoxControlGroup($model, $attribute, $data, $htmlOptions = [])
     {
         return $this->createControlGroup(TbHtml::INPUT_TYPE_LISTBOX, $model, $attribute, $htmlOptions, $data);
     }
@@ -599,7 +599,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated control group.
      * @see TbHtml::activeFileFieldControlGroup
      */
-    public function fileFieldControlGroup($model, $attribute, $htmlOptions = array())
+    public function fileFieldControlGroup($model, $attribute, $htmlOptions = [])
     {
         return $this->createControlGroup(TbHtml::INPUT_TYPE_FILE, $model, $attribute, $htmlOptions);
     }
@@ -613,7 +613,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated control group.
      * @see TbHtml::activeRadioButtonListControlGroup
      */
-    public function radioButtonListControlGroup($model, $attribute, $data, $htmlOptions = array())
+    public function radioButtonListControlGroup($model, $attribute, $data, $htmlOptions = [])
     {
         return $this->createControlGroup(TbHtml::INPUT_TYPE_RADIOBUTTONLIST, $model, $attribute, $htmlOptions, $data);
     }
@@ -627,7 +627,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated control group.
      * @see TbHtml::activeInlineCheckBoxListControlGroup
      */
-    public function inlineRadioButtonListControlGroup($model, $attribute, $data, $htmlOptions = array())
+    public function inlineRadioButtonListControlGroup($model, $attribute, $data, $htmlOptions = [])
     {
         $htmlOptions['inline'] = true;
         return $this->createControlGroup(TbHtml::INPUT_TYPE_RADIOBUTTONLIST, $model, $attribute, $htmlOptions, $data);
@@ -642,7 +642,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated control group.
      * @see TbHtml::activeCheckBoxListControlGroup
      */
-    public function checkBoxListControlGroup($model, $attribute, $data, $htmlOptions = array())
+    public function checkBoxListControlGroup($model, $attribute, $data, $htmlOptions = [])
     {
         return $this->createControlGroup(TbHtml::INPUT_TYPE_CHECKBOXLIST, $model, $attribute, $htmlOptions, $data);
     }
@@ -656,7 +656,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated control group.
      * @see TbHtml::activeInlineCheckBoxListControlGroup
      */
-    public function inlineCheckBoxListControlGroup($model, $attribute, $data, $htmlOptions = array())
+    public function inlineCheckBoxListControlGroup($model, $attribute, $data, $htmlOptions = [])
     {
         $htmlOptions['inline'] = true;
         return $this->createControlGroup(TbHtml::INPUT_TYPE_CHECKBOXLIST, $model, $attribute, $htmlOptions, $data);
@@ -670,7 +670,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated control group.
      * @see TbHtml::activeUneditableFieldControlGroup
      */
-    public function uneditableFieldControlGroup($model, $attribute, $htmlOptions = array())
+    public function uneditableFieldControlGroup($model, $attribute, $htmlOptions = [])
     {
         return $this->createControlGroup(TbHtml::INPUT_TYPE_UNEDITABLE, $model, $attribute, $htmlOptions);
     }
@@ -683,7 +683,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated control group.
      * @see TbHtml::activeSearchFieldControlGroup
      */
-    public function searchQueryControlGroup($model, $attribute, $htmlOptions = array())
+    public function searchQueryControlGroup($model, $attribute, $htmlOptions = [])
     {
         return $this->createControlGroup(TbHtml::INPUT_TYPE_SEARCH, $model, $attribute, $htmlOptions);
     }
@@ -698,7 +698,7 @@ class TbActiveForm extends CActiveForm
      * @return string the generated control group.
      * @see TbHtml::activeControlGroup
      */
-    public function createControlGroup($type, $model, $attribute, $htmlOptions = array(), $data = array())
+    public function createControlGroup($type, $model, $attribute, $htmlOptions = [], $data = [])
     {
         $htmlOptions = $this->processControlGroupOptions($model, $attribute, $htmlOptions);
         return TbHtml::activeControlGroup($type, $model, $attribute, $htmlOptions, $data);
@@ -713,19 +713,19 @@ class TbActiveForm extends CActiveForm
      */
     protected function processControlGroupOptions($model, $attribute, $options)
     {
-        $errorOptions = TbArray::popValue('errorOptions', $options, array());
+        $errorOptions = TbArray::popValue('errorOptions', $options, []);
         $enableAjaxValidation = TbArray::popValue('enableAjaxValidation', $errorOptions, true);
         $enableClientValidation = TbArray::popValue('enableClientValidation', $errorOptions, true);
         $errorOptions['type'] = $this->helpType;
         $error = $this->error($model, $attribute, $errorOptions, $enableAjaxValidation, $enableClientValidation);
         // kind of a hack for ajax forms but this works for now.
-        if (!empty($error) && strpos($error, 'display:none') === false) {
+        if (!empty($error) && !str_contains($error, 'display:none')) {
             $options['color'] = TbHtml::INPUT_COLOR_ERROR;
         }
         if (!$this->hideInlineErrors) {
             $options['error'] = $error;
         }
-        $helpOptions = TbArray::popValue('helpOptions', $options, array());
+        $helpOptions = TbArray::popValue('helpOptions', $options, []);
         $helpOptions['type'] = $this->helpType;
         $options['helpOptions'] = $helpOptions;
         return $options;

@@ -25,7 +25,7 @@ class TbTabs extends CWidget
     /**
      * @var array the tab configuration.
      */
-    public $tabs = array();
+    public $tabs = [];
     /**
      * @var array additional data submitted to the views.
      */
@@ -44,11 +44,11 @@ class TbTabs extends CWidget
     /**
      * @var array the HTML attributes for the widget container.
      */
-    public $htmlOptions = array();
+    public $htmlOptions = [];
     /**
      * @var string[] the Javascript event handlers.
      */
-    protected $events = array();
+    protected $events = [];
 
     /**
      * Widget's initialization method
@@ -66,7 +66,7 @@ class TbTabs extends CWidget
      */
     public function initEvents()
     {
-        foreach (array('onShow', 'onShown') as $event) {
+        foreach (['onShow', 'onShown'] as $event) {
             if ($this->$event !== null) {
                 $modalEvent = strtolower(substr($event, 2));
                 if ($this->$event instanceof CJavaScriptExpression) {
@@ -97,7 +97,7 @@ class TbTabs extends CWidget
         $controller = $this->getController();
         if (isset($controller)) {
             foreach ($tabs as &$tabOptions) {
-                $items = TbArray::getValue('items', $tabOptions, array());
+                $items = TbArray::getValue('items', $tabOptions, []);
                 if (!empty($items)) {
                     $tabOptions['items'] = $this->normalizeTabs($items);
                 } else {
@@ -119,7 +119,7 @@ class TbTabs extends CWidget
     public function registerClientScript()
     {
         $selector = '#' . $this->htmlOptions['id'];
-        Yii::app()->clientScript->registerScript(__CLASS__ . $selector, "jQuery('{$selector}').tab('show');");
+        Yii::app()->clientScript->registerScript(self::class . $selector, "jQuery('{$selector}').tab('show');");
         $this->registerEvents($selector, $this->events);
     }
 }

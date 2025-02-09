@@ -15,7 +15,7 @@ class TbModal extends CWidget
     /**
      * @var array the HTML options for the view container tag.
      */
-    public $htmlOptions = array();
+    public $htmlOptions = [];
 
     /**
      * @var array  The additional HTML attributes of the button that will show the modal. If empty array, only
@@ -27,7 +27,7 @@ class TbModal extends CWidget
      *
      * For available options of the button trigger, see http://twitter.github.com/bootstrap/javascript.html#modals.
      */
-    public $buttonOptions = array();
+    public $buttonOptions = [];
 
     /**
      * @var boolean indicates whether the modal should use transitions. Defaults to 'true'.
@@ -81,12 +81,12 @@ class TbModal extends CWidget
     /**
      * @var string[] the Javascript event handlers.
      */
-    protected $events = array();
+    protected $events = [];
 
     /**
      * @var array $options the plugin options.
      */
-    protected $options = array();
+    protected $options = [];
 
     /**
      * @var string
@@ -137,7 +137,7 @@ class TbModal extends CWidget
      */
     public function initEvents()
     {
-        foreach (array('onShow', 'onShown', 'onHide', 'onHidden') as $event) {
+        foreach (['onShow', 'onShown', 'onHide', 'onHidden'] as $event) {
             if ($this->$event !== null) {
                 $modalEvent = strtolower(substr($event, 2));
                 if ($this->$event instanceof CJavaScriptExpression) {
@@ -215,9 +215,9 @@ class TbModal extends CWidget
     {
         echo '<div class="modal-header">' . PHP_EOL;
         if ($this->closeText) {
-            echo TbHtml::closeButton($this->closeText, array('data-dismiss' => 'modal'));
+            echo TbHtml::closeButton($this->closeText, ['data-dismiss' => 'modal']);
         }
-        echo TbHtml::tag('h3', array(), $this->header);
+        echo TbHtml::tag('h3', [], $this->header);
         echo '</div>' . PHP_EOL;
     }
 

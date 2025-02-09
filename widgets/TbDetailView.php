@@ -19,7 +19,7 @@ class TbDetailView extends CDetailView
      * @var string|array the detail view style.
      * Valid values are TbHtml::DETAIL_STRIPED, TbHtml::DETAIL_BORDERED, TbHtml::DETAIL_CONDENSED and/or TbHtml::DETAIL_HOVER.
      */
-    public $type = array(TbHtml::DETAIL_TYPE_STRIPED, TbHtml::DETAIL_TYPE_CONDENSED);
+    public $type = [TbHtml::DETAIL_TYPE_STRIPED, TbHtml::DETAIL_TYPE_CONDENSED];
     /**
      * @var string the URL of the CSS file used by this grid view.
      * Defaults to false, meaning that no CSS will be included.
@@ -32,7 +32,7 @@ class TbDetailView extends CDetailView
     public function init()
     {
         parent::init();
-        $classes = array('table');
+        $classes = ['table'];
         if (!empty($this->type)) {
             if (is_string($this->type)) {
                 $this->type = explode(' ', $this->type);

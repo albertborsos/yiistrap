@@ -17,14 +17,14 @@ class TbTestCase extends \Codeception\TestCase\Test
      * @param array $config
      * @param string $appClass
      */
-    protected function mockApplication($config = array(), $appClass = 'TestApplication')
+    protected function mockApplication($config = [], $appClass = 'TestApplication')
     {
-        $defaultConfig = array(
+        $defaultConfig = [
             'basePath' => __DIR__,
-            'aliases' => array(
+            'aliases' => [
                 'bootstrap' => __DIR__ . '/../..',
-            ),
-        );
+            ],
+        ];
         Yii::createApplication(
             $appClass,
             CMap::mergeArray($defaultConfig, $config)
@@ -44,7 +44,7 @@ class TbTestCase extends \Codeception\TestCase\Test
      * @param array $properties
      * @return string
      */
-    protected function runWidget($widgetClass, $properties = array())
+    protected function runWidget($widgetClass, $properties = [])
     {
         return $this->mockController()->widget($widgetClass, $properties, true);
     }
@@ -54,7 +54,7 @@ class TbTestCase extends \Codeception\TestCase\Test
      * @param array $properties
      * @return CWidget
      */
-    protected function beginWidget($widgetClass, $properties = array())
+    protected function beginWidget($widgetClass, $properties = [])
     {
         return $this->mockController()->beginWidget($widgetClass, $properties);
     }

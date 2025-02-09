@@ -51,7 +51,7 @@ class TbFormButtonElement extends CFormButtonElement
 		else
 			$attributes['name']=$this->name;
 		if($method==='imageButton')
-			return TbHtml::imageButton(isset($attributes['src']) ? $attributes['src'] : '',$attributes);
+			return TbHtml::imageButton($attributes['src'] ?? '',$attributes);
 		else
 			return TbHtml::$method($this->label,$attributes);
 	}

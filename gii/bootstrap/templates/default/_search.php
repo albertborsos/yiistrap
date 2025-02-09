@@ -20,7 +20,7 @@
     <?php foreach ($this->tableSchema->columns as $column): ?>
         <?php
         $field = $this->generateInputField($this->modelClass, $column);
-        if (strpos($field, 'password') !== false) {
+        if (str_contains((string) $field, 'password')) {
             continue;
         }
         ?>

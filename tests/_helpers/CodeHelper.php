@@ -9,7 +9,7 @@ class CodeHelper extends \Codeception\Module
      */
     public function seeNodeText($node, $text)
     {
-        $this->assertTrue(strpos($node->text(), $text) !== false);
+        $this->assertTrue(str_contains((string) $node->text(), $text));
     }
 
     /**
@@ -18,7 +18,7 @@ class CodeHelper extends \Codeception\Module
      */
     public function seeNodePattern($node, $pattern)
     {
-        $this->assertEquals(1, preg_match($pattern, $node->html()));
+        $this->assertEquals(1, preg_match($pattern, (string) $node->html()));
     }
 
     /**
@@ -39,7 +39,7 @@ class CodeHelper extends \Codeception\Module
             $cssClass = explode(' ', $cssClass);
         }
         foreach ($cssClass as $className) {
-            $this->assertTrue(in_array($className, explode(' ', $node->attr('class'))));
+            $this->assertTrue(in_array($className, explode(' ', (string) $node->attr('class'))));
         }
     }
 
@@ -53,7 +53,7 @@ class CodeHelper extends \Codeception\Module
             $cssClass = explode(' ', $cssClass);
         }
         foreach ($cssClass as $className) {
-            $this->assertFalse(in_array($className, explode(' ', $node->attr('class'))));
+            $this->assertFalse(in_array($className, explode(' ', (string) $node->attr('class'))));
         }
     }
 
@@ -68,7 +68,7 @@ class CodeHelper extends \Codeception\Module
         }
         $cssStyle = $this->normalizeCssStyle($cssStyle);
         foreach ($cssStyle as $style) {
-            $this->assertTrue(strpos($node->attr('style'), $style) !== false);
+            $this->assertTrue(str_contains((string) $node->attr('style'), (string) $style));
         }
     }
 
@@ -80,7 +80,7 @@ class CodeHelper extends \Codeception\Module
     {
         array_walk(
             $cssStyle,
-            function (&$value) {
+            function (&$value): void {
                 $value = trim($value);
             }
         );
@@ -98,7 +98,7 @@ class CodeHelper extends \Codeception\Module
         }
         $cssStyle = $this->normalizeCssStyle($cssStyle);
         foreach ($cssStyle as $style) {
-            $this->assertFalse(strpos($node->attr('style'), $style));
+            $this->assertFalse(strpos((string) $node->attr('style'), (string) $style));
         }
     }
 

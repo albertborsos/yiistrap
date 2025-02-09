@@ -22,7 +22,7 @@ class TbListView extends CListView
      * @var array the configuration for the pager.
      * Defaults to <code>array('class'=>'ext.bootstrap.widgets.TbPager')</code>.
      */
-    public $pager = array('class' => 'bootstrap.widgets.TbPager');
+    public $pager = ['class' => 'bootstrap.widgets.TbPager'];
     /**
      * @var string the URL of the CSS file used by this detail view.
      * Defaults to false, meaning that no CSS will be included.
@@ -38,7 +38,7 @@ class TbListView extends CListView
      */
     public function renderEmptyText()
     {
-        $emptyText = $this->emptyText === null ? Yii::t('zii', 'No results found.') : $this->emptyText;
-        echo TbHtml::tag('div', array('class' => 'empty', 'span' => 12), $emptyText);
+        $emptyText = $this->emptyText ?? Yii::t('zii', 'No results found.');
+        echo TbHtml::tag('div', ['class' => 'empty', 'span' => 12], $emptyText);
     }
 }

@@ -21,7 +21,7 @@ class TbArray
      */
     public static function getValue($key, array $array, $defaultValue = null)
     {
-        return isset($array[$key]) ? $array[$key] : $defaultValue;
+        return $array[$key] ?? $defaultValue;
     }
 
     /**
@@ -137,7 +137,7 @@ class TbArray
         while (!empty($args)) {
             $next = array_shift($args);
             foreach ($next as $k => $v) {
-                if (is_integer($k)) {
+                if (is_int($k)) {
                     isset($res[$k]) ? $res[] = $v : $res[$k] = $v;
                 } elseif (is_array($v) && isset($res[$k]) && is_array($res[$k])) {
                     $res[$k] = self::merge($res[$k], $v);

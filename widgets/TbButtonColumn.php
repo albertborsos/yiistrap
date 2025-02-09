@@ -57,7 +57,7 @@ class TbButtonColumn extends CButtonColumn
     {
         if (isset($button['visible']) && !$this->evaluateExpression(
                 $button['visible'],
-                array('row' => $row, 'data' => $data)
+                ['row' => $row, 'data' => $data]
             )
         ) {
             return;
@@ -65,12 +65,12 @@ class TbButtonColumn extends CButtonColumn
 
         $url = TbArray::popValue('url', $button);
         if ($url !== '#' && $url !== null) {
-            $url = $this->evaluateExpression($url, array('data' => $data, 'row' => $row));
+            $url = $this->evaluateExpression($url, ['data' => $data, 'row' => $row]);
         }
 
         $imageUrl = TbArray::popValue('imageUrl', $button, false);
         $label = TbArray::popValue('label', $button, $id);
-        $options = TbArray::popValue('options', $button, array());
+        $options = TbArray::popValue('options', $button, []);
 
         TbArray::defaultValue('title', $label, $options);
         TbArray::defaultValue('rel', 'tooltip', $options);

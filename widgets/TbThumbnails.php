@@ -28,8 +28,6 @@ class TbThumbnails extends TbListView
      */
     public function init()
     {
-        parent::init();
-
         if (isset($this->itemsCssClass)) {
             TbHtml::addCssClass($this->itemsCssClass, $this->htmlOptions);
         }
@@ -41,21 +39,21 @@ class TbThumbnails extends TbListView
      */
     public function renderItems()
     {
-        $thumbnails = array();
+        $thumbnails = [];
         $data = $this->dataProvider->getData();
 
         if (!empty($data)) {
             $owner = $this->getOwner();
             $render = $owner instanceof CController ? 'renderPartial' : 'render';
             foreach ($data as $i => $row) {
-                $thumbnail = array();
+                $thumbnail = [];
                 $d = $this->viewData;
                 $d['index'] = $i;
                 $d['data'] = $row;
                 $d['widget'] = $this;
                 $thumbnail['caption'] = $owner->$render($this->itemView, $d, true);
                 if (isset($this->url)) {
-                    $thumbnail['url'] = $this->evaluateExpression($this->url, array('data' => $row));
+                    $thumbnail['url'] = $this->evaluateExpression($this->url, ['data' => $row]);
                 }
                 if (isset($this->span)) {
                     $thumbnail['span'] = $this->span;

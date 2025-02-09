@@ -31,8 +31,8 @@ class TbFormInputElement extends CFormInputElement
 	protected function renderCore()
 	{
 		// Remove the "active" prefix.
-		$method = substr(self::$coreTypes[$this->type], 6) . 'ControlGroup';
-		if(strpos($method,'List')!==false)
+		$method = substr((string) self::$coreTypes[$this->type], 6) . 'ControlGroup';
+		if(str_contains($method,'List'))
 		{
 			return $this->getParent()->getActiveFormWidget()->$method($this->getParent()->getModel(), $this->name, $this->items, $this->attributes);
 		}
@@ -48,6 +48,6 @@ class TbFormInputElement extends CFormInputElement
 	protected function renderWidget()
 	{
 		$input = parent::renderInput();
-		return TbHtml::activeControlGroup(null, $this->getParent()->getModel(), $this->name, array('input' => $input));
+		return TbHtml::activeControlGroup(null, $this->getParent()->getModel(), $this->name, ['input' => $input]);
 	}
 }

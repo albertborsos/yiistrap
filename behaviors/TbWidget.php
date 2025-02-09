@@ -101,7 +101,7 @@ class TbWidget extends CBehavior
      */
     public function resolveScriptVersion($filename, $minified = false)
     {
-        list($name, $extension) = str_split($filename, strrpos($filename, '.') + 1);
+        [$name, $extension] = str_split($filename, strrpos($filename, '.') + 1);
         return !$minified ? $name . $extension : $name . 'min.' . $extension;
     }
 
@@ -113,7 +113,7 @@ class TbWidget extends CBehavior
      * @param int $position the position of the JavaScript code.
      * @return boolean whether the plugin was registered.
      */
-    public function registerPlugin($name, $selector, $options = array(), $position = CClientScript::POS_END)
+    public function registerPlugin($name, $selector, $options = [], $position = CClientScript::POS_END)
     {
         if (($api = $this->getApi()) !== null) {
             $api->registerPlugin($name, $selector, $options, $position);

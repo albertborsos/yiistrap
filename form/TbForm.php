@@ -30,7 +30,7 @@ class TbForm extends CForm
     /**
      * @var array the configuration used to create the active form widget.
      */
-    public $activeForm = array('class' => 'TbActiveForm');
+    public $activeForm = ['class' => 'TbActiveForm'];
 
     /**
      * Initializes this form.
@@ -57,7 +57,7 @@ class TbForm extends CForm
         if ($element->getVisible()) {
             if ($element instanceof CFormInputElement) {
                 if ($element->type === 'hidden') {
-                    return TbHtml::tag('div', array('class' => 'hidden'), $element->render());
+                    return TbHtml::tag('div', ['class' => 'hidden'], $element->render());
                 }
             }
             return $element->render();
@@ -71,10 +71,10 @@ class TbForm extends CForm
      */
     public function renderButtons()
     {
-        $buttons = array();
+        $buttons = [];
         foreach ($this->getButtons() as $button) {
             $buttons[] = $this->renderElement($button);
         }
-        return !empty($buttons) ? TbHtml::tag('div', array('class' => 'form-actions'), implode("\n", $buttons)) : '';
+        return !empty($buttons) ? TbHtml::tag('div', ['class' => 'form-actions'], implode("\n", $buttons)) : '';
     }
 }

@@ -16,10 +16,13 @@
             "homepage": "http://www.ramirezcobos.com/"
         }
     ],
+    "require": {
+        "php": ">=8.3.0",
+        "yiisoft/yii": ">=1.1.30"
+    },
     "require-dev": {
         "codeception/codeception": "@stable",
-        "crisu83/yii-composer": ">=1.0.0",
-        "yiisoft/yii": ">=1.1.13"
+        "crisu83/yii-composer": ">=1.0.0"
     },
     "scripts": {
         "post-install-cmd": [

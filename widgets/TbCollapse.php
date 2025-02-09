@@ -36,15 +36,15 @@ class TbCollapse extends CWidget
     /**
      * @var string[] $events the JavaScript event configuration (name=>handler).
      */
-    public $events = array();
+    public $events = [];
     /**
      * @var array the HTML attributes for the container.
      */
-    public $htmlOptions = array();
+    public $htmlOptions = [];
     /**
      * @var array additional data to be passed to the view.
      */
-    public $viewData = array();
+    public $viewData = [];
 
     /**
      * Initializes the widget.
