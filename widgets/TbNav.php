@@ -28,7 +28,7 @@ class TbNav extends CWidget
     /**
      * @var array list of menu items. Each menu item is specified as an array of name-value pairs.
      */
-    public $items = array();
+    public $items = [];
     /**
      * @var boolean whether the labels for menu items should be HTML-encoded. Defaults to true.
      */
@@ -49,7 +49,7 @@ class TbNav extends CWidget
     /**
      * @var array HTML attributes for the menu's root container tag.
      */
-    public $htmlOptions = array();
+    public $htmlOptions = [];
 
     // todo: consider supporting these.
     //public $submenuHtmlOptions = array();
@@ -70,7 +70,7 @@ class TbNav extends CWidget
         }
         if (isset($this->scrollspy)) {
             if (is_string($this->scrollspy)) {
-                $this->scrollspy = array('target' => $this->scrollspy);
+                $this->scrollspy = ['target' => $this->scrollspy];
             }
             $this->widget('bootstrap.widgets.TbScrollspy', $this->scrollspy);
         }
@@ -155,7 +155,7 @@ class TbNav extends CWidget
      */
     protected function isItemActive($item, $route)
     {
-        if (isset($item['url']) && is_array($item['url']) && !strcasecmp(trim($item['url'][0], '/'), $route)) {
+        if (isset($item['url']) && is_array($item['url']) && !strcasecmp(trim((string) $item['url'][0], '/'), $route)) {
             unset($item['url']['#']);
             if (count($item['url']) > 1) {
                 foreach (array_splice($item['url'], 1) as $name => $value) {

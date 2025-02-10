@@ -20,7 +20,7 @@ class TbHeroUnit extends CWidget
     /**
      * @var array the HTML attributes for the heading.
      */
-    public $headingOptions = array();
+    public $headingOptions = [];
     /**
      * @var string the content text.
      */
@@ -32,11 +32,11 @@ class TbHeroUnit extends CWidget
     /**
      * @var array the HTML attributes for the container tag.
      */
-    public $htmlOptions = array();
+    public $htmlOptions = [];
     /**
      * @var array additional data to be passed to the view.
      */
-    public $viewData = array();
+    public $viewData = [];
 
     /**
      * Initializes the widget.

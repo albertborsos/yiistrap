@@ -28,7 +28,7 @@ class TbScrollspy extends CWidget
     /**
      * @var string[] $events the JavaScript event configuration (name=>handler).
      */
-    public $events = array();
+    public $events = [];
 
     /**
      * Initializes the widget.

@@ -32,11 +32,11 @@ class TbBreadcrumb extends CWidget
     /**
      * @var array the HTML attributes for the breadcrumbs.
      */
-    public $htmlOptions = array();
+    public $htmlOptions = [];
     /**
      * @var array list of links to appear in the breadcrumbs.
      */
-    public $links = array();
+    public $links = [];
 
     /**
      * Initializes the widget.
@@ -53,10 +53,10 @@ class TbBreadcrumb extends CWidget
     {
         // todo: consider adding control property for displaying breadcrumbs even when empty.
         if (!empty($this->links)) {
-            $links = array();
+            $links = [];
             if ($this->homeLabel !== false) {
-                $label = $this->homeLabel !== null ? $this->homeLabel : TbHtml::icon('home');
-                $links[$label] = $this->homeUrl !== null ? $this->homeUrl : Yii::app()->homeUrl;
+                $label = $this->homeLabel ?? TbHtml::icon('home');
+                $links[$label] = $this->homeUrl ?? Yii::app()->homeUrl;
             }
             foreach ($this->links as $label => $url) {
                 if (is_string($label) || is_array($url)) {

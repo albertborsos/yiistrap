@@ -29,13 +29,13 @@ class TbDataColumn extends CDataColumn
     {
         if ($this->grid->enableSorting && $this->sortable && $this->name !== null) {
             $sort = $this->grid->dataProvider->getSort();
-            $label = isset($this->header) ? $this->header : $sort->resolveLabel($this->name);
+            $label = $this->header ?? $sort->resolveLabel($this->name);
 
             if ($sort->resolveAttribute($this->name) !== false) {
                 $label .= '<span class="caret"></span>';
             }
 
-            echo $sort->link($this->name, $label, array('class' => 'sort-link'));
+            echo $sort->link($this->name, $label, ['class' => 'sort-link']);
         } else {
             if ($this->name !== null && $this->header === null) {
                 if ($this->grid->dataProvider instanceof CActiveDataProvider) {
@@ -69,10 +69,10 @@ class TbDataColumn extends CDataColumn
         if (is_string($this->filter)) {
             echo $this->filter;
         } else {
-            if ($this->filter !== false && $this->grid->filter !== null && $this->name !== null && strpos(
+            if ($this->filter !== false && $this->grid->filter !== null && $this->name !== null && !str_contains(
                     $this->name,
                     '.'
-                ) === false
+                )
             ) {
                 if ($this->filterInputOptions) {
                     $filterInputOptions = $this->filterInputOptions;
@@ -80,7 +80,7 @@ class TbDataColumn extends CDataColumn
                         $filterInputOptions['id'] = false;
                     }
                 } else {
-                    $filterInputOptions = array();
+                    $filterInputOptions = [];
                 }
                 if (is_array($this->filter)) {
                     $filterInputOptions['prompt'] = '';

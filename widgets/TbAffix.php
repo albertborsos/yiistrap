@@ -24,7 +24,7 @@ class TbAffix extends CWidget
     /**
      * @var array the HTML attributes for the container.
      */
-    public $htmlOptions = array();
+    public $htmlOptions = [];
 
     /**
      * Initializes the widget.
@@ -36,11 +36,11 @@ class TbAffix extends CWidget
         $this->htmlOptions['data-spy'] = 'affix';
         if (isset($this->offset)) {
             if (is_string($this->offset)) {
-                $this->offset = array('top', $this->offset);
+                $this->offset = ['top', $this->offset];
             }
 
             if (is_array($this->offset) && count($this->offset) === 2) {
-                list($position, $offset) = $this->offset;
+                [$position, $offset] = $this->offset;
                 $this->htmlOptions['data-offset-' . $position] = $offset;
             }
         }

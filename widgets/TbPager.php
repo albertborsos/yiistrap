@@ -46,7 +46,7 @@ class TbPager extends CBasePager
     /**
      * @var array HTML attributes for the pager container tag.
      */
-    public $htmlOptions = array();
+    public $htmlOptions = [];
 
     /**
      * Initializes the widget.
@@ -78,13 +78,13 @@ class TbPager extends CBasePager
     protected function createPageLinks()
     {
         if (($pageCount = $this->getPageCount()) <= 1) {
-            return array();
+            return [];
         }
 
-        list($beginPage, $endPage) = $this->getPageRange();
+        [$beginPage, $endPage] = $this->getPageRange();
 
         $currentPage = $this->getCurrentPage(false); // currentPage is calculated in getPageRange()
-        $links = array();
+        $links = [];
 
         // first page
         if (!$this->hideFirstAndLast) {
@@ -133,12 +133,12 @@ class TbPager extends CBasePager
      */
     protected function createPageLink($label, $page, $disabled, $active)
     {
-        return array(
+        return [
             'label' => $label,
             'url' => $this->createPageUrl($page),
             'disabled' => $disabled,
             'active' => $active,
-        );
+        ];
     }
 
     /**
@@ -153,6 +153,6 @@ class TbPager extends CBasePager
             $endPage = $pageCount - 1;
             $beginPage = max(0, $endPage - $this->maxButtonCount + 1);
         }
-        return array($beginPage, $endPage);
+        return [$beginPage, $endPage];
     }
 }

@@ -145,7 +145,7 @@ class TbApi extends CApplicationComponent
      * @param array $options the JavaScript options for the plugin.
      * @see http://twitter.github.com/bootstrap/javascript.html#popover
      */
-    public function registerPopover($selector = 'body', $options = array())
+    public function registerPopover($selector = 'body', $options = [])
     {
         if (!isset($options['selector'])) {
             $options['selector'] = 'a[rel=popover]';
@@ -159,7 +159,7 @@ class TbApi extends CApplicationComponent
      * @param array $options the JavaScript options for the plugin.
      * @see http://twitter.github.com/bootstrap/javascript.html#tooltip
      */
-    public function registerTooltip($selector = 'body', $options = array())
+    public function registerTooltip($selector = 'body', $options = [])
     {
         if (!isset($options['selector'])) {
             $options['selector'] = 'a[rel=tooltip]';
@@ -174,11 +174,11 @@ class TbApi extends CApplicationComponent
      * @param array $options the JavaScript options for the plugin.
      * @param int $position the position of the JavaScript code.
      */
-    public function registerPlugin($name, $selector, $options = array(), $position = CClientScript::POS_END)
+    public function registerPlugin($name, $selector, $options = [], $position = CClientScript::POS_END)
     {
         $options = !empty($options) ? CJavaScript::encode($options) : '';
         $script = "jQuery('{$selector}').{$name}({$options});";
-        $id = __CLASS__ . '#Plugin' . self::$counter++;
+        $id = self::class . '#Plugin' . self::$counter++;
         Yii::app()->clientScript->registerScript($id, $script, $position);
     }
 
@@ -198,7 +198,7 @@ class TbApi extends CApplicationComponent
                 }
                 $script .= "jQuery('{$selector}').on('{$name}', {$handler});";
             }
-            $id = __CLASS__ . '#Events' . self::$counter++;
+            $id = self::class . '#Events' . self::$counter++;
             Yii::app()->clientScript->registerScript($id, $script, $position);
         }
     }

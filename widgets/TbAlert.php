@@ -32,11 +32,11 @@ class TbAlert extends CWidget
     /**
      * @var string[] the JavaScript event configuration (name=>handler).
      */
-    public $events = array();
+    public $events = [];
     /**
      * @var array the HTML attributes for the alert container.
      */
-    public $htmlOptions = array();
+    public $htmlOptions = [];
 
     /**
      * Initializes the widget.
@@ -49,18 +49,18 @@ class TbAlert extends CWidget
             $colors = explode(' ', $this->alerts);
         } else {
             if (!isset($this->alerts)) {
-                $colors = array(
+                $colors = [
                     TbHtml::ALERT_COLOR_SUCCESS,
                     TbHtml::ALERT_COLOR_WARNING,
                     TbHtml::ALERT_COLOR_INFO,
                     TbHtml::ALERT_COLOR_ERROR
-                ); // render all styles by default
+                ]; // render all styles by default
             }
         }
         if (isset($colors)) {
-            $this->alerts = array();
+            $this->alerts = [];
             foreach ($colors as $color) {
-                $this->alerts[$color] = array();
+                $this->alerts[$color] = [];
             }
         }
     }
@@ -82,7 +82,7 @@ class TbAlert extends CWidget
             }
 
             if ($user->hasFlash($color)) {
-                $htmlOptions = TbArray::popValue('htmlOptions', $alert, array());
+                $htmlOptions = TbArray::popValue('htmlOptions', $alert, []);
                 TbArray::defaultValue('closeText', $this->closeText, $htmlOptions);
                 TbArray::defaultValue('block', $this->block, $htmlOptions);
                 TbArray::defaultValue('fade', $this->fade, $htmlOptions);

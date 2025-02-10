@@ -28,7 +28,7 @@ class TbNavbar extends CWidget
     /**
      * @var array the HTML attributes for the brand link.
      */
-    public $brandOptions = array();
+    public $brandOptions = [];
     /**
      * @var string nanvbar display type.
      */
@@ -44,15 +44,15 @@ class TbNavbar extends CWidget
     /**
      * @var array additional HTML attributes for the collapse widget.
      */
-    public $collapseOptions = array();
+    public $collapseOptions = [];
     /**
      * @var array list of navbar item.
      */
-    public $items = array();
+    public $items = [];
     /**
      * @var array the HTML attributes for the navbar.
      */
-    public $htmlOptions = array();
+    public $htmlOptions = [];
 
     /**
      * Initializes the widget.
@@ -103,11 +103,11 @@ class TbNavbar extends CWidget
             /* @var TbCollapse $collapseWidget */
             $collapseWidget = $this->controller->widget(
                 'bootstrap.widgets.TbCollapse',
-                array(
+                [
                     'toggle' => false, // navbars are collapsed by default
                     'content' => $items,
                     'htmlOptions' => $this->collapseOptions,
-                )
+                ]
             );
             $collapseContent = ob_get_clean();
             echo TbHtml::navbarCollapseLink('#' . $collapseWidget->getId());
@@ -117,7 +117,7 @@ class TbNavbar extends CWidget
             echo $brand . $items;
         }
         $containerContent = ob_get_clean();
-        $containerOptions = TbArray::popValue('containerOptions', $this->htmlOptions, array());
+        $containerOptions = TbArray::popValue('containerOptions', $this->htmlOptions, []);
         TbHtml::addCssClass($this->fluid ? 'container-fluid' : 'container', $containerOptions);
         ob_start();
         echo TbHtml::openTag('div', $containerOptions);

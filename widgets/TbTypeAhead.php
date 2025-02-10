@@ -17,7 +17,7 @@ class TbTypeAhead extends CInputWidget
      * two arguments, the query value in the input field and the process callback. The function may be used synchronously
      * by returning the data source directly or asynchronously via the process callback's single argument.
      */
-    public $source = array();
+    public $source = [];
 
     /**
      * @var int the max number of items to display in the dropdown. Defaults to 8.
@@ -58,7 +58,7 @@ class TbTypeAhead extends CInputWidget
     /**
      * @var array the plugin options
      */
-    protected $pluginOptions = array();
+    protected $pluginOptions = [];
 
     /**
      * Widget's initialization method.
@@ -74,8 +74,8 @@ class TbTypeAhead extends CInputWidget
      */
     public function initOptions()
     {
-        $options = array();
-        foreach (array('matcher', 'sorter', 'updater', 'highlighter') as $fn) {
+        $options = [];
+        foreach (['matcher', 'sorter', 'updater', 'highlighter'] as $fn) {
             if ($this->$fn !== null) {
                 if ($this->$fn instanceof CJavaScriptExpression) {
                     $options[$fn] = $this->$fn;
@@ -86,11 +86,11 @@ class TbTypeAhead extends CInputWidget
         }
 
         $this->pluginOptions = TbArray::merge(
-            array(
+            [
                 'source' => $this->source,
                 'items' => $this->items,
                 'minLength' => $this->minLength
-            ),
+            ],
             $options
         );
     }
@@ -109,7 +109,7 @@ class TbTypeAhead extends CInputWidget
      */
     public function renderField()
     {
-        list($name, $id) = $this->resolveNameID();
+        [$name, $id] = $this->resolveNameID();
 
         TbArray::defaultValue('id', $id, $this->htmlOptions);
         TbArray::defaultValue('name', $name, $this->htmlOptions);

@@ -25,7 +25,7 @@ class TbGridView extends CGridView
      * @var array the configuration for the pager.
      * Defaults to <code>array('class'=>'ext.bootstrap.widgets.TbPager')</code>.
      */
-    public $pager = array('class' => 'bootstrap.widgets.TbPager');
+    public $pager = ['class' => 'bootstrap.widgets.TbPager'];
     /**
      * @var string the URL of the CSS file used by this grid view.
      * Defaults to false, meaning that no CSS will be included.
@@ -42,7 +42,7 @@ class TbGridView extends CGridView
     public function init()
     {
         parent::init();
-        $classes = array('table');
+        $classes = ['table'];
         if (isset($this->type) && !empty($this->type)) {
             if (is_string($this->type)) {
                 $this->type = explode(' ', $this->type);
@@ -83,7 +83,7 @@ class TbGridView extends CGridView
      */
     protected function createDataColumn($text)
     {
-        if (!preg_match('/^([\w\.]+)(:(\w*))?(:(.*))?$/', $text, $matches)) {
+        if (!preg_match('/^([\w\.]+)(:(\w*))?(:(.*))?$/', (string) $text, $matches)) {
             throw new CException(Yii::t(
                 'zii',
                 'The column must be specified in the format of "Name:Type:Label", where "Type" and "Label" are optional.'
